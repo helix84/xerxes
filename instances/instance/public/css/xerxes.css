@@ -419,7 +419,8 @@ dd, dt, li {
 }
 
 .result {
-	margin-bottom: 3em;
+	clear:left;
+	margin-bottom: 4em;
 	line-height: 130%;
 }
 

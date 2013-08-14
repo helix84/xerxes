@@ -1044,6 +1044,8 @@
 	
 	<xsl:template name="brief_result_info">
 		
+		<xsl:call-template name="brief_result_info-cover" />
+		
 		<div class="results-info">
 		
 			<xsl:call-template name="brief_result_info-type" />
@@ -1080,6 +1082,30 @@
 	
 	</xsl:template>
 	
+	<xsl:template name="brief_result_info-cover">
+		<div class="isbn" style="float:left; margin-right:1em">
+		
+			<xsl:variable name="cover-size">medium</xsl:variable>
+			<xsl:choose>
+				<xsl:when test="standard_numbers/isbn">
+					<img>
+						<xsl:attribute name="src">
+							<xsl:value-of select="concat('http://utb.summon.serialssolutions.com/2.0.0/image/isbn/MN6HU4JX5X/', standard_numbers/isbn, '/', $cover-size)" />
+						</xsl:attribute>
+					</img>
+				</xsl:when>
+				<xsl:when test="standard_numbers/issn">
+					<img>
+						<xsl:attribute name="src">
+							<xsl:value-of select="concat('http://utb.summon.serialssolutions.com/2.0.0/image/issn/MN6HU4JX5X/', standard_numbers/issn, '/', $cover-size)" />
+						</xsl:attribute>
+					</img>
+				</xsl:when>
+			</xsl:choose>
+		
+		</div>
+	</xsl:template>
+		
 	<xsl:template name="brief_result_info-type">
 		<div class="results-type">
 		
