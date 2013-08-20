@@ -1027,7 +1027,8 @@
 					
 				</xsl:when>
 				<xsl:otherwise>
-			
+					
+					<xsl:call-template name="brief_result_info-cover" />
 					<a class="results-title" href="{../url_full}"><xsl:value-of select="$title" /></a>
 					<xsl:call-template name="brief_result_info" />
 					
@@ -1036,6 +1037,13 @@
 			
 		</li>
 	
+	</xsl:template>
+
+	<!-- 
+		TEMPLATE: BOOK COVER
+	-->
+	
+	<xsl:template name="brief_result_info-cover">
 	</xsl:template>
 
 	<!-- 

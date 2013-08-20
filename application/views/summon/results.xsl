@@ -277,5 +277,42 @@
 	</form>
 
 </xsl:template>
-			
+
+<xsl:template name="module_javascript">
+
+<script type="application/javascript">
+	$("img.cover").load(function() {
+		if ( $( this ).attr('src') == 'images/no-image.gif') {
+			$( this ).remove();
+		}
+	});
+</script>
+	
+</xsl:template>
+
+
+	<xsl:template name="brief_result_info-cover">
+		<div class="cover" style="float:right; margin-left:1em">
+		
+			<xsl:variable name="cover-size">medium</xsl:variable>
+			<xsl:choose>
+				<xsl:when test="standard_numbers/isbn">
+					<img class="cover">
+						<xsl:attribute name="src">
+							<xsl:value-of select="concat('http://utb.summon.serialssolutions.com/2.0.0/image/isbn/', //config[@source='summon']/client_id, '/', standard_numbers/isbn, '/', $cover-size)" />
+						</xsl:attribute>
+					</img>
+				</xsl:when>
+				<xsl:when test="standard_numbers/issn">
+					<img class="cover">
+						<xsl:attribute name="src">
+							<xsl:value-of select="concat('http://utb.summon.serialssolutions.com/2.0.0/image/issn/', //config[@source='summon']/client_id, '/', substring(standard_numbers/issn, 1, 4), '-', substring(standard_numbers/issn, 5, 4), '/', $cover-size)" />
+						</xsl:attribute>
+					</img>
+				</xsl:when>
+			</xsl:choose>
+		
+		</div>
+	</xsl:template>
+	
 </xsl:stylesheet>
