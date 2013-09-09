@@ -529,4 +529,31 @@ class Databases extends DataMap
 		
 		return $arrDatabases;
 	}
+	
+	public function getDatabases2()
+	{
+		$sql = "SELECT * from xerxes_databases";
+		$params = array();
+		
+		$sql .= " ORDER BY UPPER(title_display)";
+		
+		$arrResults = $this->select( $sql );
+		
+		// transform to internal data objects
+		
+		$arrDatabases = array();
+
+		if ( $arrResults != null )
+		{
+			foreach ( $arrResults as $arrResult )
+			{
+				array_push($arrDatabases, $this->createResourceObject($arrResult));
+			}
+		}
+		
+		// limit to quoted phrases
+		
+		return $arrResults;
+//		return $arrDatabases;
+	}
 }

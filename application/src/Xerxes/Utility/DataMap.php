@@ -184,7 +184,7 @@ abstract class DataMap extends DatabaseConnection
 	 * @param array $values
 	 */
 	
-	private function log($sql, array $values)
+	private function log($sql, array $values = null)
 	{
 		$this->sql = $sql;
 		
