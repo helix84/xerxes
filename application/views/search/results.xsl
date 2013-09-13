@@ -1097,7 +1097,7 @@
 				<xsl:when test="standard_numbers/issn">
 					<img>
 						<xsl:attribute name="src">
-							<xsl:value-of select="concat('http://utb.summon.serialssolutions.com/2.0.0/image/issn/MN6HU4JX5X/', standard_numbers/issn, '/', $cover-size)" />
+							<xsl:value-of select="concat('http://utb.summon.serialssolutions.com/2.0.0/image/issn/MN6HU4JX5X/', substring(standard_numbers/issn, 1, 4), '-', substring(standard_numbers/issn, 5, 4), '/', $cover-size)" />
 						</xsl:attribute>
 					</img>
 				</xsl:when>
