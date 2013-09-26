@@ -530,6 +530,13 @@ class Databases extends DataMap
 		return $arrDatabases;
 	}
 	
+	/**
+	 * Get databases from the knowledgebase. This version works in Xerxes 2 and uses the xerxes_databases table with imported Metalib databases from Xerxes 1
+	 *
+	 * @param string $query		[optional] query to search for dbs. 
+	 * @return array 			of Database objects
+	 */
+	
 	public function getDatabases2()
 	{
 		$sql = "SELECT * from xerxes_databases";
@@ -554,6 +561,65 @@ class Databases extends DataMap
 		// limit to quoted phrases
 		
 		return $arrResults;
-//		return $arrDatabases;
+	}
+	
+	/**
+	 * Calls getDatabases2() and preprocesses the list for display in the alphabetical.xml view.
+	 * @return array 			of Database objects
+	 */
+	
+	public function processDatabases()
+	{
+		$arrResults = array ( );
+		$arrResults = $this->getDatabases2();
+		
+		foreach ( $arrResults as $objDatabaseData )
+		{
+			$objDom = new \DOMDocument();
+			$objDom->loadXML( $objDatabaseData['data'] );
+			
+			$nodeList = $objDom->getElementsByTagName('link_native_home');
+			$link_native_home = $nodeList->item(0)->nodeValue;
+//			$objElement = $objDom->createElement( "xerxes_native_link_url", "http://proxy.k.utb.cz/login?qurl=" . htmlentities ( $link_native_home ) );
+			$objElement = $objDom->createElement( "xerxes_native_link_url", htmlentities ( $link_native_home ) );
+			$objDom->documentElement->appendChild($objElement);
+
+/* TODO: proxy link
+			$objElement = $objDom->createElement( "xerxes_native_link_url", $this->request->url_for( array("base" => "databases", "action" => "proxy", "database" => htmlentities( $objDatabaseData->metalib_id ) ) ) );
+			$objDom->documentElement->appendChild($objElement);
+*/
+			
+			// db_description_multilingual
+			$nodeList = $objDom->getElementsByTagName('description');
+			if ($nodeList->length != 0) {
+				$descVal = $nodeList->item(0)->nodeValue;
+				$vals = explode('######', $descVal);
+				$langs = array('cze', 'eng');	// TODO: get from config
+//echo "count=". count($vals) ."\n". var_export($vals) ."\n\n\n";
+				if (count($vals) > 1) {
+					for ($i = 0; $i < count($vals); $i++) {
+						$element = $objDom->createElement('description', $vals[$i]);
+					
+						$elemAttr = $objDom->createAttribute('lang');
+						$elemAttr->value = $langs[$i];
+						$element->appendChild($elemAttr);
+						
+						$objDom->documentElement->appendChild($element);
+					}
+					$objDom->documentElement->removeChild($nodeList->item(0));
+				} else {
+					$elemAttr = $objDom->createAttribute('lang');
+					$elemAttr->value = 'ALL';
+					$$nodeList->item(0)->appendChild($elemAttr);
+				}
+//echo "<p>".$objDom->saveXML()."</p>";
+			}
+			
+			
+			$result[] = $objDom;
+//			$this->databases[] = $objDatabaseData;
+		}
+		
+		return $result;
 	}
 }

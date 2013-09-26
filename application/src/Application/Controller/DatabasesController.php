@@ -12,6 +12,7 @@
 namespace Application\Controller;
 
 use Xerxes\Mvc\ActionController;
+use Application\Model\DataMap\Databases;
 
 class DatabasesController extends ActionController
 {
@@ -21,4 +22,17 @@ class DatabasesController extends ActionController
 		
 		return $this->redirectTo($params);
 	}
+	
+	public function alphabeticalAction()
+	{
+		$databases = new Databases();
+		
+		$this->response->setVariable('databases', $databases->processDatabases());
+			
+		$this->response->setView('databases/alphabetical.xsl');
+		
+		return $this->response;
+	}
+
+
 }
