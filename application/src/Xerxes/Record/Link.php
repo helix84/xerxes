@@ -273,6 +273,12 @@ class Link
 		
 		$xml->url = $this->getURL();
 		
+		// display legacy Xerxes 1.x proxy URLs as direct URLs
+		if (strpos($xml->url, '&action=proxy'))
+		{
+			$xml->url = urldecode(substr(strstr($this->getURL(), '&url='), 5));
+		}
+		
 		return Parser::convertToDOMDocument($xml);
 	}
 }
