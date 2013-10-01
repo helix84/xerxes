@@ -591,4 +591,30 @@ xmlns:php="http://php.net/xsl" exclude-result-prefixes="php">
 	<xsl:variable name="text_facets_to">To:</xsl:variable>
 	<xsl:variable name="text_facets_update">Update</xsl:variable>
 	
+	<xsl:template name="category_group_map">
+		<xsl:param name="id" />
+		<xsl:choose>
+			<xsl:when test="$id = 'chemistry'">Chemistry</xsl:when>
+			<xsl:when test="$id = 'economy'">Economy</xsl:when>
+			<xsl:when test="$id = 'environment'">Environmental sciences</xsl:when>
+			<xsl:when test="$id = 'humanities'">Humanities</xsl:when>
+			<xsl:when test="$id = 'medicine'">Medicine</xsl:when>
+			<xsl:when test="$id = 'languages'">Linguistics</xsl:when>
+			<xsl:when test="$id = 'social'">Social sciences</xsl:when>
+			<xsl:when test="$id = 'technology'">Technology</xsl:when>
+			<xsl:when test="$id = 'art'">Arts and design</xsl:when>
+			<xsl:when test="$id = 'education'">Education</xsl:when>
+			<xsl:when test="$id = 'food'">Agriculture, food</xsl:when>
+			<xsl:when test="$id = 'information'">Information sciences</xsl:when>
+			<xsl:otherwise>
+				<xsl:call-template name="category_group_map_local">
+					<xsl:with-param name="id"><xsl:value-of select="$id" /></xsl:with-param>
+				</xsl:call-template>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+	<xsl:template name="category_group_map_local">
+		<xsl:param name="id" />
+	</xsl:template>
+	
 </xsl:stylesheet>

@@ -1072,4 +1072,30 @@ xmlns:php="http://php.net/xsl" exclude-result-prefixes="php">
 	<xsl:variable name="text_facets_to">Do:</xsl:variable>
 	<xsl:variable name="text_facets_update">Aktualizovat</xsl:variable>
 	
+	<xsl:template name="category_group_map">
+		<xsl:param name="id" />
+		<xsl:choose>
+			<xsl:when test="$id = 'chemistry'">Chemie</xsl:when>
+			<xsl:when test="$id = 'economy'">Ekonomie</xsl:when>
+			<xsl:when test="$id = 'environment'">Environmentální vědy</xsl:when>
+			<xsl:when test="$id = 'humanities'">Humanitní vědy</xsl:when>
+			<xsl:when test="$id = 'medicine'">Lékařství</xsl:when>
+			<xsl:when test="$id = 'languages'">Lingvistika, jazyky</xsl:when>
+			<xsl:when test="$id = 'social'">Sociální vědy</xsl:when>
+			<xsl:when test="$id = 'technology'">Technika</xsl:when>
+			<xsl:when test="$id = 'art'">Umění a design</xsl:when>
+			<xsl:when test="$id = 'education'">Výchova a vzdělávání</xsl:when>
+			<xsl:when test="$id = 'food'">Zemědělství, potravinářství</xsl:when>
+			<xsl:when test="$id = 'information'">Informační vědy</xsl:when>
+			<xsl:otherwise>
+				<xsl:call-template name="category_group_map_local">
+					<xsl:with-param name="id"><xsl:value-of select="$id" /></xsl:with-param>
+				</xsl:call-template>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+	<xsl:template name="category_group_map_local">
+		<xsl:param name="id" />
+	</xsl:template>
+	
 </xsl:stylesheet>

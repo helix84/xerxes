@@ -40,6 +40,149 @@
 			<field id="subject" public="subject" internal="SubjectTerms" />
 		</config>
 		
+		<!--
+			optional: subject categories on the summon/index page
+			These are Summon facets grouped into custom, higher-level groups. This is also
+			useful for grouping facets relevant to different faculties/departments.
+		 -->
+		<config name="category_groups" xml="true" pass="true">
+			<group id="fields">
+				<facet_group facet="Discipline" id="chemistry">
+					<facet id="environmental sciences" />
+					<facet id="chemistry" />
+					<facet id="pharmacy, therapeutics, &amp; pharmacology" />
+					<facet id="sciences" />
+					<facet id="statistics" />
+				</facet_group>
+				<facet_group facet="Discipline" id="economy">
+					<facet id="business" />
+					<facet id="economics" />
+					<facet id="sciences" />
+					<facet id="statistics" />
+				</facet_group>
+				<facet_group facet="Discipline" id="environment">
+					<facet id="agriculture" />
+					<facet id="biology" />
+					<facet id="botany" />
+					<facet id="ecology" />
+					<facet id="environmental sciences" />
+					<facet id="forestry" />
+					<facet id="geography" />
+					<facet id="geology" />
+					<facet id="meteorology &amp; climatology" />
+					<facet id="military &amp; naval science" />
+					<facet id="oceanography" />
+					<facet id="pharmacy, therapeutics, &amp; pharmacology" />
+					<facet id="sciences" />
+					<facet id="statistics" />
+					<facet id="zoology" />
+				</facet_group>
+				<facet_group facet="Discipline" id="humanities">
+					<facet id="anthropology" />
+					<facet id="education" />
+					<facet id="history &amp; archaeology" />
+					<facet id="international relations" />
+					<facet id="journalism &amp; communications" />
+					<facet id="law" />
+					<facet id="philosophy" />
+					<facet id="political science" />
+					<facet id="psychology" />
+					<facet id="religion" />
+					<facet id="sciences" />
+					<facet id="social sciences" />
+					<facet id="social welfare &amp; social work" />
+					<facet id="sociology &amp; social history" />
+					<facet id="statistics" />
+					<facet id="women's studies" />
+				</facet_group>
+				<facet_group facet="Discipline" id="medicine">
+					<facet id="anatomy &amp; physiology" />
+					<facet id="biology" />
+					<facet id="dentistry" />
+					<facet id="diet &amp; clinical nutrition" />
+					<facet id="medicine" />
+					<facet id="nursing" />
+					<facet id="occupational therapy &amp; rehabilitation" />
+					<facet id="pharmacy\\, therapeutics\\, &amp; pharmacology" />
+					<facet id="physical therapy" />
+					<facet id="psychology" />
+					<facet id="public health" />
+					<facet id="sciences" />
+					<facet id="veterinary medicine" />
+				</facet_group>
+				<facet_group facet="Discipline" id="languages">
+					<facet id="journalism &amp; communications" />
+					<facet id="languages &amp; literatures" />
+				</facet_group>
+				<facet_group facet="Discipline" id="social">
+					<facet id="applied sciences" />
+					<facet id="economics" />
+					<facet id="education" />
+					<facet id="government " />
+					<facet id="international relations" />
+					<facet id="journalism &amp; communications" />
+					<facet id="law" />
+					<facet id="occupational therapy &amp; rehabilitation" />
+					<facet id="parapsychology &amp; occult sciences" />
+					<facet id="political science" />
+					<facet id="public health" />
+					<facet id="recreation &amp; sports" />
+					<facet id="religion" />
+					<facet id="social sciences" />
+					<facet id="social welfare &amp; social work" />
+					<facet id="sociology &amp; social history" />
+					<facet id="women's studies" />
+				</facet_group>
+				<facet_group facet="Discipline" id="technology">
+					<facet id="applied sciences" />
+					<facet id="architecture" />
+					<facet id="astronomy &amp; astrophysics" />
+					<facet id="computer science" />
+					<facet id="engineering " />
+					<facet id="mathematics" />
+					<facet id="military &amp; naval science" />
+					<facet id="physics" />
+					<facet id="sciences" />
+					<facet id="statistics" />
+				</facet_group>
+				<facet_group facet="Discipline" id="art">
+					<facet id="architecture" />
+					<facet id="dance" />
+					<facet id="drama" />
+					<facet id="film" />
+					<facet id="music" />
+					<facet id="visual arts" />
+				</facet_group>
+				<facet_group facet="Discipline" id="education">
+					<facet id="education" />
+					<facet id="psychology" />
+					<facet id="social sciences" />
+					<facet id="social welfare &amp; social work" />
+				</facet_group>
+				<facet_group facet="Discipline" id="food">
+					<facet id="agriculture" />
+					<facet id="biology" />
+					<facet id="botany" />
+					<facet id="diet &amp; clinical nutrition" />
+					<facet id="ecology" />
+					<facet id="environmental sciences" />
+					<facet id="forestry" />
+					<facet id="geography" />
+					<facet id="geology" />
+					<facet id="meteorology &amp; climatology" />
+					<facet id="veterinary medicine" />
+					<facet id="zoology" />
+				</facet_group>
+				<facet_group facet="Discipline" id="information">
+					<facet id="computer science" />
+					<facet id="engineering " />
+					<facet id="library &amp; information science" />
+					<facet id="mathematics" />
+					<facet id="statistics" />
+				</facet_group>
+			</group>
+		</config>
+		
 	</configuration>
 	
 </xerxes>
