@@ -227,6 +227,10 @@ abstract class SearchController extends ActionController
 		$sort = $this->request->getParam('sort', $this->sort);
 		$include_facets = $this->request->getParam('include_facets', $this->include_facets);
 		
+		// split facet values containing the "|" separator into separate facet values
+		
+		$this->processFacets();
+		
 		// swap for internal
 		
 		$internal_sort = $this->config->swapForInternalSort($sort);
@@ -596,4 +600,45 @@ abstract class SearchController extends ActionController
 		
 		return $num;
 	}
+	
+	/**
+	 * expand multiple values of a facet to multiple facets
+	 * e.g. facet.Discipline=engineering|biology => facet.Discipline=engineering&facet.Discipline=biology
+	 */
+		
+	public function processFacets()
+	{
+		$params = $this->request->getParams("facet.*");
+		
+		foreach ( $params as $facet_name => $facet_value)
+		{
+			if ( is_array($facet_value) )
+			{
+				// there are multiple facets with the same name (represented as an array)
+				
+				// rebuild the array, splitting all values previously melded by "|"
+				$new_array = array();
+				
+				foreach ( $facet_value as $key => $value)
+				{
+					if ( strpos( $value, '|' ) )
+					{
+						$values = explode( '|', $value );
+						$new_array = array_unique(array_merge($new_array, $values));
+					} else {
+						$new_array[] = $value;
+					}
+					$this->request->deleteParam($facet_name);
+					$this->request->setParam($facet_name, $new_array, $is_array = true);
+				}
+			}
+			else if ( strpos( $facet_value, '|' ) )
+			{
+				$values = explode( '|', $facet_value );
+				$this->request->deleteParam($facet_name);
+				$this->request->setParam($facet_name, $values, $is_array = true);
+			}
+		}
+	}
+	
 }

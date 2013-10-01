@@ -486,6 +486,32 @@ class Request extends HttpFoundation\Request
 		}
 	}
 	
+	
+	/**
+	 * Delete a request parameter
+	 *
+	 * @param string $key			key to identify the parameter to delete
+	 * @param int $index			if not null, $key is considered to be an array and only the field with the specified index will be deleted
+	 */
+	
+	public function deleteParam( $key, $index = null )
+	{
+		if ( !isset($index) )
+		{
+			// param is a single value
+			if ( array_key_exists( $key, $this->params ) )
+			{
+				unset($this->params[$key]);
+			}
+		} else {
+			// param is an array of values
+			if ( array_key_exists( $key, $this->params ) && array_key_exists( $index, $this->params[$key] ) )
+			{
+				unset($this->params[$key][$index]);
+			}
+		}
+	}
+	
 	/**
 	 * Replace a parameter with supplied value
 	 *
