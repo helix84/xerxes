@@ -176,9 +176,30 @@ abstract class SearchController extends ActionController
 	
 	/**
 	 * Return total number of hits for search (usually for ajax)
+	 * wrapper that returns an empty page on error if running in production
 	 */
 	
 	public function hitsAction()
+	{
+		if ( ini_get('display_errors') !=  1 ) {
+			try
+			{
+				$this->hits();
+			}
+			catch ( \Exception $e )
+			{
+				$this->response->noView();
+			}
+		} else {
+			$this->hits();
+		}
+	}
+	
+	/**
+	 * Return total number of hits for search (usually for ajax)
+	 */
+	
+	public function hits()
 	{
 		// create an identifier for this search
 		
@@ -213,6 +234,7 @@ abstract class SearchController extends ActionController
 		
 		return $this->response;
 	}
+	
 	
 	/**
 	 * Fetch search results, log it, check spelling (if necessary) 
