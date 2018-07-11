@@ -300,19 +300,18 @@
 
 			<div class="cover" style="float:right; margin-left:1em">
 			
-				<xsl:variable name="cover-size">medium</xsl:variable>
 				<xsl:choose>
 					<xsl:when test="standard_numbers/isbn">
 						<img class="cover">
 							<xsl:attribute name="src">
-								<xsl:value-of select="concat('http://summon.serialssolutions.com/2.0.0/image/isbn/', //config[@source='summon']/client_id, '/', standard_numbers/isbn, '/', $cover-size)" />
+								<xsl:value-of select="concat('http://covers-cdn.summon.serialssolutions.com/index.aspx?client=summon&amp;freeimage=true&amp;isbn=', standard_numbers/isbn, '/sc.gif')" />
 							</xsl:attribute>
 						</img>
 					</xsl:when>
 					<xsl:when test="standard_numbers/issn">
 						<img class="cover">
 							<xsl:attribute name="src">
-								<xsl:value-of select="concat('http://summon.serialssolutions.com/2.0.0/image/issn/', //config[@source='summon']/client_id, '/', substring(standard_numbers/issn, 1, 4), '-', substring(standard_numbers/issn, 5, 4), '/', $cover-size)" />
+								<xsl:value-of select="concat('http://covers-cdn.summon.serialssolutions.com/index.aspx?isbn=/sc.gif&amp;client=summon&amp;issn=', standard_numbers/issn)" />
 							</xsl:attribute>
 						</img>
 					</xsl:when>
